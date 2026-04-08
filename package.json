@@ -1,0 +1,153 @@
+{
+  "name": "sfdx-dependency-map",
+  "displayName": "SFDX Dependency Map",
+  "description": "Visual dependency graph for Salesforce DX projects — map Apex classes, LWC components, triggers, and identify unused code.",
+  "version": "0.1.0",
+  "publisher": "your-publisher-id",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "salesforce",
+    "sfdx",
+    "apex",
+    "lwc",
+    "dependency",
+    "graph",
+    "dead code"
+  ],
+  "activationEvents": [
+    "workspaceContains:sfdx-project.json"
+  ],
+  "main": "./out/extension.js",
+  "icon": "media/icon.png",
+  "contributes": {
+    "commands": [
+      {
+        "command": "sfdxDependencyMap.showGraph",
+        "title": "SFDX: Show Dependency Graph",
+        "icon": "$(type-hierarchy)"
+      },
+      {
+        "command": "sfdxDependencyMap.refresh",
+        "title": "SFDX: Refresh Dependency Graph",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "sfdxDependencyMap.findUnused",
+        "title": "SFDX: Find Unused Classes & Components"
+      },
+      {
+        "command": "sfdxDependencyMap.focusNode",
+        "title": "SFDX: Focus on Class/Component"
+      },
+      {
+        "command": "sfdxDependencyMap.impactAnalysis",
+        "title": "SFDX: Impact Analysis — What breaks if I change this?"
+      },
+      {
+        "command": "sfdxDependencyMap.findCycles",
+        "title": "SFDX: Find Circular Dependencies"
+      },
+      {
+        "command": "sfdxDependencyMap.exportReport",
+        "title": "SFDX: Export Dependency Report (JSON)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "sfdx-dependency-map",
+          "title": "SFDX Dependency Map",
+          "icon": "media/sidebar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "sfdx-dependency-map": [
+        {
+          "id": "sfdxDependencyMap.unusedItems",
+          "name": "Unused Classes & Components",
+          "type": "tree"
+        },
+        {
+          "id": "sfdxDependencyMap.dependencies",
+          "name": "Dependencies",
+          "type": "tree"
+        }
+      ]
+    },
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceExtname == .cls || resourceExtname == .html",
+          "command": "sfdxDependencyMap.showGraph",
+          "group": "navigation"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "sfdxDependencyMap.refresh",
+          "when": "view == sfdxDependencyMap.unusedItems",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "SFDX Dependency Map",
+      "properties": {
+        "sfdxDependencyMap.excludePatterns": {
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/.sfdx/**"
+          ],
+          "description": "Glob patterns for files to exclude from analysis."
+        },
+        "sfdxDependencyMap.entryPoints": {
+          "type": "array",
+          "default": [],
+          "description": "Classes/components to always consider 'used' (e.g., Schedulable, Batchable entry points)."
+        },
+        "sfdxDependencyMap.includeTestClasses": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include test classes in the dependency graph."
+        },
+        "sfdxDependencyMap.graphLayout": {
+          "type": "string",
+          "enum": [
+            "force-directed",
+            "hierarchical",
+            "circular"
+          ],
+          "default": "force-directed",
+          "description": "Default graph layout algorithm."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {}
+}
