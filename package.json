@@ -1,6 +1,6 @@
 {
-  "name": "sfdx-dependency-map",
-  "displayName": "SFDX Dependency Map",
+  "name": "sf-dependency-analysis",
+  "displayName": "SF Dependency Analysis",
   "description": "Visual dependency graph for Salesforce DX projects — map Apex classes, LWC components, triggers, and identify unused code.",
   "version": "0.1.0",
   "publisher": "your-publisher-id",
@@ -28,54 +28,54 @@
   "contributes": {
     "commands": [
       {
-        "command": "sfdxDependencyMap.showGraph",
-        "title": "SFDX Mapping: Show Dependency Graph",
+        "command": "sfDependencyAnalysis.showGraph",
+        "title": "SF Analysis: Show Dependency Graph",
         "icon": "$(type-hierarchy)"
       },
       {
-        "command": "sfdxDependencyMap.refresh",
-        "title": "SFDX Mapping: Refresh Dependency Graph",
+        "command": "sfDependencyAnalysis.refresh",
+        "title": "SF Analysis: Refresh Dependency Graph",
         "icon": "$(refresh)"
       },
       {
-        "command": "sfdxDependencyMap.findUnused",
-        "title": "SFDX Mapping: Find Unused Classes & Components"
+        "command": "sfDependencyAnalysis.findUnused",
+        "title": "SF Analysis: Find Unused Classes & Components"
       },
       {
-        "command": "sfdxDependencyMap.focusNode",
-        "title": "SFDX Mapping: Focus on Class/Component"
+        "command": "sfDependencyAnalysis.focusNode",
+        "title": "SF Analysis: Focus on Class/Component"
       },
       {
-        "command": "sfdxDependencyMap.impactAnalysis",
-        "title": "SFDX Mapping: Impact Analysis — What breaks if I change this?"
+        "command": "sfDependencyAnalysis.impactAnalysis",
+        "title": "SF Analysis: Impact Analysis — What breaks if I change this?"
       },
       {
-        "command": "sfdxDependencyMap.findCycles",
-        "title": "SFDX Mapping: Find Circular Dependencies"
+        "command": "sfDependencyAnalysis.findCycles",
+        "title": "SF Analysis: Find Circular Dependencies"
       },
       {
-        "command": "sfdxDependencyMap.exportReport",
-        "title": "SFDX Mapping: Export Dependency Report (JSON)"
+        "command": "sfDependencyAnalysis.exportReport",
+        "title": "SF Analysis: Export Dependency Report (JSON)"
       }
     ],
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "sfdx-dependency-map",
-          "title": "SFDX Dependency Map",
+          "id": "sf-dependency-analysis",
+          "title": "SF Dependency Analysis",
           "icon": "media/sidebar-icon.svg"
         }
       ]
     },
     "views": {
-      "sfdx-dependency-map": [
+      "sf-dependency-analysis": [
         {
-          "id": "sfdxDependencyMap.unusedItems",
+          "id": "sfDependencyAnalysis.unusedItems",
           "name": "Unused Classes & Components",
           "type": "tree"
         },
         {
-          "id": "sfdxDependencyMap.dependencies",
+          "id": "sfDependencyAnalysis.dependencies",
           "name": "Dependencies",
           "type": "tree"
         }
@@ -85,22 +85,22 @@
       "editor/title": [
         {
           "when": "resourceExtname == .cls || resourceExtname == .html",
-          "command": "sfdxDependencyMap.showGraph",
+          "command": "sfDependencyAnalysis.showGraph",
           "group": "navigation"
         }
       ],
       "view/title": [
         {
-          "command": "sfdxDependencyMap.refresh",
-          "when": "view == sfdxDependencyMap.unusedItems",
+          "command": "sfDependencyAnalysis.refresh",
+          "when": "view == sfDependencyAnalysis.unusedItems",
           "group": "navigation"
         }
       ]
     },
     "configuration": {
-      "title": "SFDX Dependency Map",
+      "title": "SF Dependency Analysis",
       "properties": {
-        "sfdxDependencyMap.excludePatterns": {
+        "sfDependencyAnalysis.excludePatterns": {
           "type": "array",
           "default": [
             "**/node_modules/**",
@@ -108,17 +108,17 @@
           ],
           "description": "Glob patterns for files to exclude from analysis."
         },
-        "sfdxDependencyMap.entryPoints": {
+        "sfDependencyAnalysis.entryPoints": {
           "type": "array",
           "default": [],
           "description": "Classes/components to always consider 'used' (e.g., Schedulable, Batchable entry points)."
         },
-        "sfdxDependencyMap.includeTestClasses": {
+        "sfDependencyAnalysis.includeTestClasses": {
           "type": "boolean",
           "default": false,
           "description": "Include test classes in the dependency graph."
         },
-        "sfdxDependencyMap.graphLayout": {
+        "sfDependencyAnalysis.graphLayout": {
           "type": "string",
           "enum": [
             "force-directed",

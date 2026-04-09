@@ -30,7 +30,7 @@ export class DependencyAnalyzer {
     const allEdges: DependencyEdge[] = [];
     const errors: ParseError[] = [];
 
-    const config = vscode.workspace.getConfiguration('sfdxDependencyMap');
+    const config = vscode.workspace.getConfiguration('sfDependencyAnalysis');
     const includeTests = config.get<boolean>('includeTestClasses', false);
 
     // ── Step 1: Parse Apex classes ─────────────────────────
@@ -371,7 +371,7 @@ export class DependencyAnalyzer {
       referenced.add(edge.target);
     }
 
-    const config = vscode.workspace.getConfiguration('sfdxDependencyMap');
+    const config = vscode.workspace.getConfiguration('sfDependencyAnalysis');
     const userEntryPoints = new Set(
       config.get<string[]>('entryPoints', []).map(e => {
         return e.includes(':') ? e : `apex:${e}`;
