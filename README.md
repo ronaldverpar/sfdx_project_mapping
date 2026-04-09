@@ -53,6 +53,10 @@ Classes and components are flagged as unused with **confidence levels**:
 ### Diagnostics
 Unused classes appear as warnings/info in the VS Code Problems panel.
 
+## How It Works
+
+This extension runs **entirely locally** — it performs static analysis of source files on disk using VS Code's filesystem APIs. It does **not** connect to a Salesforce org, make API calls, or send any data over the network. All parsing is regex-based against your local `.cls`, `.cmp`, `.html`, and `.trigger` files.
+
 ## Getting Started
 
 1. Open a Salesforce DX project (must have `sfdx-project.json`)
