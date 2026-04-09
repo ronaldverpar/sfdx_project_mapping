@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-A VS Code extension that builds a visual dependency graph for Salesforce DX projects. It parses Apex classes, LWC components, Aura components, and triggers using regex-based parsers, then constructs a directed graph to detect unused code, circular dependencies, and impact analysis.
+A VS Code extension (`sf-dependency-analysis`) that builds a visual dependency graph for Salesforce DX projects. It parses Apex classes, LWC components, Aura components, and triggers using regex-based parsers, then constructs a directed graph to detect unused code, circular dependencies, and impact analysis. It runs entirely locally — no Salesforce org connections or network calls.
 
 ## Commands
 

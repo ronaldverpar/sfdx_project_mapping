@@ -9,8 +9,8 @@ export class GraphWebviewProvider {
   show(result: AnalysisResult): void {
     if (!this.panel) {
       this.panel = vscode.window.createWebviewPanel(
-        'sfdxDependencyGraph',
-        'SFDX Dependency Graph',
+        'sfDependencyAnalysis',
+        'SF Dependency Analysis',
         vscode.ViewColumn.One,
         { enableScripts: true, retainContextWhenHidden: true }
       );

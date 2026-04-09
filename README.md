@@ -1,4 +1,4 @@
-# SFDX Dependency Map
+# SF Dependency Analysis
 
 > Visual dependency graph for Salesforce DX projects — map Apex classes, LWC components, triggers, and **identify unused code**.
 
@@ -61,29 +61,29 @@ This extension runs **entirely locally** — it performs static analysis of sour
 
 1. Open a Salesforce DX project (must have `sfdx-project.json`)
 2. Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`)
-3. Run **"SFDX: Show Dependency Graph"**
+3. Run **"SF Analysis: Show Dependency Graph"**
 4. The graph opens in a side panel — explore your codebase!
 
 ## Commands
 
 | Command | Description |
 |---|---|
-| `SFDX: Show Dependency Graph` | Run analysis and open the interactive graph |
-| `SFDX: Refresh Dependency Graph` | Re-run analysis (also triggered on file save) |
-| `SFDX: Find Unused Classes & Components` | Quick-pick list of unused items |
-| `SFDX: Focus on Class/Component` | Search and zoom to a specific node |
-| `SFDX: Impact Analysis` | Select a class to see everything that would break if it changes |
-| `SFDX: Find Circular Dependencies` | Detect and report all cycles in the graph |
-| `SFDX: Export Dependency Report (JSON)` | Export full analysis to a JSON file |
+| `SF Analysis: Show Dependency Graph` | Run analysis and open the interactive graph |
+| `SF Analysis: Refresh Dependency Graph` | Re-run analysis (also triggered on file save) |
+| `SF Analysis: Find Unused Classes & Components` | Quick-pick list of unused items |
+| `SF Analysis: Focus on Class/Component` | Search and zoom to a specific node |
+| `SF Analysis: Impact Analysis` | Select a class to see everything that would break if it changes |
+| `SF Analysis: Find Circular Dependencies` | Detect and report all cycles in the graph |
+| `SF Analysis: Export Dependency Report (JSON)` | Export full analysis to a JSON file |
 
 ## Configuration
 
 | Setting | Default | Description |
 |---|---|---|
-| `sfdxDependencyMap.excludePatterns` | `["**/node_modules/**", "**/.sfdx/**"]` | Glob patterns to exclude |
-| `sfdxDependencyMap.entryPoints` | `[]` | Classes to always consider "used" |
-| `sfdxDependencyMap.includeTestClasses` | `false` | Include @IsTest classes in the graph |
-| `sfdxDependencyMap.graphLayout` | `"force-directed"` | Layout algorithm |
+| `sfDependencyAnalysis.excludePatterns` | `["**/node_modules/**", "**/.sfdx/**"]` | Glob patterns to exclude |
+| `sfDependencyAnalysis.entryPoints` | `[]` | Classes to always consider "used" |
+| `sfDependencyAnalysis.includeTestClasses` | `false` | Include @IsTest classes in the graph |
+| `sfDependencyAnalysis.graphLayout` | `"force-directed"` | Layout algorithm |
 
 ## Architecture
 
