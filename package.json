@@ -29,33 +29,33 @@
     "commands": [
       {
         "command": "sfdxDependencyMap.showGraph",
-        "title": "SFDX: Show Dependency Graph",
+        "title": "SFDX Mapping: Show Dependency Graph",
         "icon": "$(type-hierarchy)"
       },
       {
         "command": "sfdxDependencyMap.refresh",
-        "title": "SFDX: Refresh Dependency Graph",
+        "title": "SFDX Mapping: Refresh Dependency Graph",
         "icon": "$(refresh)"
       },
       {
         "command": "sfdxDependencyMap.findUnused",
-        "title": "SFDX: Find Unused Classes & Components"
+        "title": "SFDX Mapping: Find Unused Classes & Components"
       },
       {
         "command": "sfdxDependencyMap.focusNode",
-        "title": "SFDX: Focus on Class/Component"
+        "title": "SFDX Mapping: Focus on Class/Component"
       },
       {
         "command": "sfdxDependencyMap.impactAnalysis",
-        "title": "SFDX: Impact Analysis — What breaks if I change this?"
+        "title": "SFDX Mapping: Impact Analysis — What breaks if I change this?"
       },
       {
         "command": "sfdxDependencyMap.findCycles",
-        "title": "SFDX: Find Circular Dependencies"
+        "title": "SFDX Mapping: Find Circular Dependencies"
       },
       {
         "command": "sfdxDependencyMap.exportReport",
-        "title": "SFDX: Export Dependency Report (JSON)"
+        "title": "SFDX Mapping: Export Dependency Report (JSON)"
       }
     ],
     "viewsContainers": {
