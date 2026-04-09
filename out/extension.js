@@ -46,17 +46,17 @@ function activate(context) {
     const unusedTree = new treeProviders_1.UnusedTreeProvider();
     const depTree = new treeProviders_1.DependencyTreeProvider();
     // Register tree views
-    vscode.window.registerTreeDataProvider('sfdxDependencyMap.unusedItems', unusedTree);
-    vscode.window.registerTreeDataProvider('sfdxDependencyMap.dependencies', depTree);
+    vscode.window.registerTreeDataProvider('sfDependencyAnalysis.unusedItems', unusedTree);
+    vscode.window.registerTreeDataProvider('sfDependencyAnalysis.dependencies', depTree);
     // ─── Command: Show Dependency Graph ─────────────────────
-    context.subscriptions.push(vscode.commands.registerCommand('sfdxDependencyMap.showGraph', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('sfDependencyAnalysis.showGraph', async () => {
         const workspacePath = getWorkspacePath();
         if (!workspacePath) {
             return;
         }
         await vscode.window.withProgress({
             location: vscode.ProgressLocation.Notification,
-            title: 'SFDX Dependency Map',
+            title: 'SF Dependency Analysis',
             cancellable: false,
         }, async (progress) => {
             try {
@@ -78,7 +78,7 @@ function activate(context) {
                 vscode.window.showInformationMessage(`Dependency Map: ${parts.join(', ')}.`);
                 // Report errors if any
                 if (analysisResult.errors.length > 0) {
-                    const channel = vscode.window.createOutputChannel('SFDX Dependency Map');
+                    const channel = vscode.window.createOutputChannel('SF Dependency Analysis');
                     channel.appendLine(`── Parse Errors (${analysisResult.errors.length}) ──`);
                     for (const err of analysisResult.errors) {
                         channel.appendLine(`  ${err.filePath}: ${err.message}`);
@@ -92,14 +92,14 @@ function activate(context) {
         });
     }));
     // ─── Command: Refresh ───────────────────────────────────
-    context.subscriptions.push(vscode.commands.registerCommand('sfdxDependencyMap.refresh', () => {
-        vscode.commands.executeCommand('sfdxDependencyMap.showGraph');
+    context.subscriptions.push(vscode.commands.registerCommand('sfDependencyAnalysis.refresh', () => {
+        vscode.commands.executeCommand('sfDependencyAnalysis.showGraph');
     }));
     // ─── Command: Find Unused ───────────────────────────────
-    context.subscriptions.push(vscode.commands.registerCommand('sfdxDependencyMap.findUnused', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('sfDependencyAnalysis.findUnused', async () => {
         if (!analysisResult) {
             // Run analysis first
-            await vscode.commands.executeCommand('sfdxDependencyMap.showGraph');
+            await vscode.commands.executeCommand('sfDependencyAnalysis.showGraph');
         }
         if (analysisResult && analysisResult.unused.length > 0) {
             // Show quick pick of unused items
@@ -125,7 +125,7 @@ function activate(context) {
         }
     }));
     // ─── Command: Focus Node ────────────────────────────────
-    context.subscriptions.push(vscode.commands.registerCommand('sfdxDependencyMap.focusNode', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('sfDependencyAnalysis.focusNode', async () => {
         if (!analysisResult) {
             vscode.window.showWarningMessage('Run the dependency analysis first.');
             return;
@@ -145,7 +145,7 @@ function activate(context) {
         }
     }));
     // ─── Command: Impact Analysis ────────────────────────────
-    context.subscriptions.push(vscode.commands.registerCommand('sfdxDependencyMap.impactAnalysis', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('sfDependencyAnalysis.impactAnalysis', async () => {
         if (!analysisResult) {
             vscode.window.showWarningMessage('Run the dependency analysis first.');
             return;
@@ -167,7 +167,7 @@ function activate(context) {
             vscode.window.showInformationMessage(`No other classes or components depend on "${selected.label.replace(/\$\([^)]+\)\s*/, '')}".`);
             return;
         }
-        const channel = vscode.window.createOutputChannel('SFDX Impact Analysis');
+        const channel = vscode.window.createOutputChannel('SF Impact Analysis');
         channel.clear();
         channel.appendLine(`═══ Impact Analysis: ${selected.label.replace(/\$\([^)]+\)\s*/, '')} ═══`);
         channel.appendLine(`If this ${selected.description} changes, ${impacted.length} item(s) could be affected:\n`);
@@ -194,7 +194,7 @@ function activate(context) {
         graphWebview.focusNode(selected.nodeId);
     }));
     // ─── Command: Find Cycles ──────────────────────────────
-    context.subscriptions.push(vscode.commands.registerCommand('sfdxDependencyMap.findCycles', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('sfDependencyAnalysis.findCycles', async () => {
         if (!analysisResult) {
             vscode.window.showWarningMessage('Run the dependency analysis first.');
             return;
@@ -204,7 +204,7 @@ function activate(context) {
             vscode.window.showInformationMessage('No circular dependencies found — your codebase is clean!');
             return;
         }
-        const channel = vscode.window.createOutputChannel('SFDX Circular Dependencies');
+        const channel = vscode.window.createOutputChannel('SF Circular Dependencies');
         channel.clear();
         channel.appendLine(`═══ Circular Dependencies Found: ${cycles.length} ═══\n`);
         cycles.forEach((cycle, i) => {
@@ -219,7 +219,7 @@ function activate(context) {
         channel.show(true);
     }));
     // ─── Command: Export Report ─────────────────────────────
-    context.subscriptions.push(vscode.commands.registerCommand('sfdxDependencyMap.exportReport', async () => {
+    context.subscriptions.push(vscode.commands.registerCommand('sfDependencyAnalysis.exportReport', async () => {
         if (!analysisResult) {
             vscode.window.showWarningMessage('Run the dependency analysis first.');
             return;
@@ -252,7 +252,7 @@ function activate(context) {
             errors: analysisResult.errors,
         };
         const uri = await vscode.window.showSaveDialog({
-            defaultUri: vscode.Uri.file('sfdx-dependency-report.json'),
+            defaultUri: vscode.Uri.file('sf-dependency-report.json'),
             filters: { 'JSON': ['json'] },
         });
         if (uri) {
@@ -268,7 +268,7 @@ function activate(context) {
     watcher.onDidChange(() => {
         if (analysisResult) {
             // Debounced re-analysis
-            vscode.commands.executeCommand('sfdxDependencyMap.refresh');
+            vscode.commands.executeCommand('sfDependencyAnalysis.refresh');
         }
     });
     context.subscriptions.push(watcher);
@@ -276,7 +276,7 @@ function activate(context) {
     const diagnosticCollection = vscode.languages.createDiagnosticCollection('sfdx-unused');
     context.subscriptions.push(diagnosticCollection);
     // Update diagnostics when analysis runs
-    context.subscriptions.push(vscode.commands.registerCommand('sfdxDependencyMap._updateDiagnostics', () => {
+    context.subscriptions.push(vscode.commands.registerCommand('sfDependencyAnalysis._updateDiagnostics', () => {
         diagnosticCollection.clear();
         if (!analysisResult) {
             return;
@@ -289,13 +289,13 @@ function activate(context) {
             const severity = item.confidence === 'high'
                 ? vscode.DiagnosticSeverity.Warning
                 : vscode.DiagnosticSeverity.Information;
-            const diagnostic = new vscode.Diagnostic(new vscode.Range(0, 0, 0, 0), `[SFDX Dep Map] ${item.reason}`, severity);
-            diagnostic.source = 'sfdx-dependency-map';
+            const diagnostic = new vscode.Diagnostic(new vscode.Range(0, 0, 0, 0), `[SF Dep Analysis] ${item.reason}`, severity);
+            diagnostic.source = 'sf-dependency-analysis';
             const existing = diagnosticCollection.get(uri) || [];
             diagnosticCollection.set(uri, [...existing, diagnostic]);
         }
     }));
-    console.log('SFDX Dependency Map activated');
+    console.log('SF Dependency Analysis activated');
 }
 function deactivate() { }
 // ─── Helpers ────────────────────────────────────────────────

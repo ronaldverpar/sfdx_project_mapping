@@ -41,7 +41,7 @@ class GraphWebviewProvider {
     }
     show(result) {
         if (!this.panel) {
-            this.panel = vscode.window.createWebviewPanel('sfdxDependencyGraph', 'SFDX Dependency Graph', vscode.ViewColumn.One, { enableScripts: true, retainContextWhenHidden: true });
+            this.panel = vscode.window.createWebviewPanel('sfDependencyAnalysis', 'SF Dependency Analysis', vscode.ViewColumn.One, { enableScripts: true, retainContextWhenHidden: true });
             this.panel.onDidDispose(() => { this.panel = undefined; });
         }
         const nodes = [...result.graph.nodes.values()].map(n => ({
