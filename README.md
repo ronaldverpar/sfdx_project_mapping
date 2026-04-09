@@ -82,7 +82,7 @@ This extension runs **entirely locally** — it performs static analysis of sour
 `SF Analysis: Find Circular Dependencies`
 ![Description](media/Screenshot%202026-04-09%20at%205.52.24%20PM.png)
 `SF Analysis: Impact Analysis -- what breaks if I change this?`
-![Description](media/Screenshot%202026-04-09%20at%205.52.24%20PM.png)
+![Description](media/Screenshot%202026-04-09%20at%205.53.45%20PM.png)
 
 ## Configuration
 
