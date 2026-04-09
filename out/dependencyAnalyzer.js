@@ -58,7 +58,7 @@ class DependencyAnalyzer {
         const nodes = new Map();
         const allEdges = [];
         const errors = [];
-        const config = vscode.workspace.getConfiguration('sfdxDependencyMap');
+        const config = vscode.workspace.getConfiguration('sfDependencyAnalysis');
         const includeTests = config.get('includeTestClasses', false);
         // ── Step 1: Parse Apex classes ─────────────────────────
         progress?.report({ message: 'Scanning Apex classes...', increment: 0 });
@@ -352,7 +352,7 @@ class DependencyAnalyzer {
         for (const edge of graph.edges) {
             referenced.add(edge.target);
         }
-        const config = vscode.workspace.getConfiguration('sfdxDependencyMap');
+        const config = vscode.workspace.getConfiguration('sfDependencyAnalysis');
         const userEntryPoints = new Set(config.get('entryPoints', []).map(e => {
             return e.includes(':') ? e : `apex:${e}`;
         }));
