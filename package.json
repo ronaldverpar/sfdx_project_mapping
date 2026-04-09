@@ -2,7 +2,7 @@
   "name": "sf-dependency-analysis",
   "displayName": "SF Dependency Analysis",
   "description": "Visual dependency graph for Salesforce DX projects — map Apex classes, LWC components, triggers, and identify unused code.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "sf-dependency-analysis",
   "repository": {
     "type": "git",
