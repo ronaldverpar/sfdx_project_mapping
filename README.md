@@ -76,6 +76,14 @@ This extension runs **entirely locally** — it performs static analysis of sour
 | `SF Analysis: Find Circular Dependencies` | Detect and report all cycles in the graph |
 | `SF Analysis: Export Dependency Report (JSON)` | Export full analysis to a JSON file |
 
+## Screenshots
+`SF Analysis: Show Dependency Graph`
+![Description](media/Screenshot%202026-04-09%20at%205.51.59%20PM.png)
+`SF Analysis: Find Circular Dependencies`
+![Description](media/Screenshot%202026-04-09%20at%205.52.24%20PM.png)
+`SF Analysis: Impact Analysis -- what breaks if I change this?`
+![Description](media/Screenshot%202026-04-09%20at%205.52.24%20PM.png)
+
 ## Configuration
 
 | Setting | Default | Description |
